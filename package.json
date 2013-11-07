@@ -1,0 +1,19 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.3.7",
+    "jade": "*",
+    "passport-local": "~0.1.6",
+    "passport": "~0.1.17",
+    "mongoose": "~3.8.0",
+    "bootable": "~0.1.0",
+    "nconf": "~0.6.8",
+    "winston": "~0.7.2",
+    "require-tree": "~0.3.2"
+  }
+}
