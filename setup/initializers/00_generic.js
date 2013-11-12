@@ -14,12 +14,14 @@
 /**
  * Module dependencies.
  */
-var config    = require('../../lib/utils').config;
-var log       = require('../../lib/utils').log(module);
+var config    = require('nconf');
+var log       = require('winston-wrapper')(module);
+var pwd       = process.env.PWD;
 
 // end of dependencies.
 
 
 module.exports = function() {
-
+  // Setup nconf
+  config.file({'file': pwd+'/config.json'});
 };

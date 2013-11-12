@@ -3,8 +3,9 @@
 /**
  * Module dependencies.
  */
-var log            = require('../../lib/utils').log(module);
-var config         = require('../../lib/utils').config;
+var log            = require('winston-wrapper')(module);
+var config         = require('nconf');
+
 var passport       = require('passport');
 
 // End of dependencies.

@@ -14,6 +14,7 @@
     "bootable": "~0.1.0",
     "nconf": "~0.6.8",
     "winston": "~0.7.2",
-    "require-tree": "~0.3.2"
+    "require-tree": "~0.3.2",
+    "winston-wrapper": "~1.0.0"
   }
 }

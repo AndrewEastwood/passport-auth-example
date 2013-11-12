@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-var log = require('../lib/utils').log(module);
+var log = require('winston-wrapper')(module);
 var mongoose = require('mongoose');
 
 // End of dependencies.

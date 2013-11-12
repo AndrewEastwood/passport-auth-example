@@ -3,8 +3,9 @@
 /**
  * Module dependencies.
  */
-var log = require('../lib/utils').log(module);
-var config = require('../lib/utils').config;
+var log            = require('winston-wrapper')(module);
+var config         = require('nconf');
+
 var requireTree    = require('require-tree');
 var controllers    = requireTree('../controllers');
 var mustAuthenticatedMw = require('../middlewares/must-authenticated');  

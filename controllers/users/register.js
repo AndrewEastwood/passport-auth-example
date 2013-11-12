@@ -3,11 +3,10 @@
 /**
  * Module dependencies.
  */
-var log            = require('../../lib/utils').log(module);
-var config         = require('../../lib/utils').config;
-var passport       = require('passport');
-var mongoose       = require('mongoose');
-var User           = mongoose.model('user');
+var log            = require('winston-wrapper')(module);
+var config         = require('nconf');
+
+var User           = require('mongoose').model('user');
 
 // End of dependencies.
 

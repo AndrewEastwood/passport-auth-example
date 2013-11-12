@@ -11,9 +11,10 @@
 
 'use strict';
 
+var log            = require('winston-wrapper')(module);
+var config         = require('nconf');
+
 var mongoose       = require('mongoose');
-var log            = require('../../lib/utils').log(module);
-var config         = require('../../lib/utils').config;
 var requireTree    = require('require-tree');
 var models         = requireTree('../../models/');
 

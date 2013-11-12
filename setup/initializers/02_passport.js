@@ -14,8 +14,9 @@
 /**
  * Module dependencies.
  */
-var config         = require('../../lib/utils').config;
-var log            = require('../../lib/utils').log(module);
+var log            = require('winston-wrapper')(module);
+var config         = require('nconf');
+
 var passport       = require('passport');
 var LocalStrategy  = require('passport-local').Strategy;
 var mongoose       = require('mongoose');

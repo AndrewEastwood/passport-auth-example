@@ -4,36 +4,30 @@
  * Module dependencies.
  */
 
-var log            = require('./lib/utils').log(module, 'You are Welcome!');
-var config         = require('./lib/utils').config;
+var log            = require('winston-wrapper')(module);
+var config         = require('nconf');
+
 var express        = require('express');
-var loggerMw       = require('./middlewares/express-logger');
-
-var requireTree    = require('require-tree');
-var passport       = require('passport');
-var LocalStrategy  = require('passport-local').Strategy;
 var bootable       = require('bootable');
+var bootableEnv    = require('bootable-environment');
 
+// End of dependencies.
 
 
 var app = bootable(express());
 
-app.phase(bootable.initializers('./setup/initializers'));
+// Setup initializers
+app.phase(bootable.initializers('setup/initializers'));
 
+// Setup environments
+app.phase(bootableEnv('setup/environments', app));
+
+// Setup routes
 app.phase(function(){
-  log.info('Setup Environment');
-  require('./setup/environments/').all(app);
-});
-
-
-
-app.phase(function(){
-  log.info('Setup Routes');
   require('./routes')(app);
 });
 
-
-
+// Boot app
 app.boot(function(err) {
   if (err) { throw err; }
   app.listen(config.get('express:port'), function() {
