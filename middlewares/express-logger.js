@@ -3,7 +3,7 @@
 /**
  * Module dependencies.
  */
-var log     = require('winston-wrapper')(module);
+var log            = require('winston-wrapper')(module);
 
 // end of dependencies.
 

@@ -3,12 +3,12 @@
 /**
  * Module dependencies.
  */
-var log            = require('winston-wrapper')(module);
-var config         = require('nconf');
+var log                      = require('winston-wrapper')(module);
+var config                   = require('nconf');
 
-var requireTree    = require('require-tree');
-var controllers    = requireTree('../controllers');
-var mustAuthenticatedMw = require('../middlewares/must-authenticated');  
+var requireTree              = require('require-tree');
+var controllers              = requireTree('../controllers');
+var mustAuthenticatedMw      = require('../middlewares/must-authenticated');  
 
 // End of dependencies.
 
@@ -16,19 +16,19 @@ var mustAuthenticatedMw = require('../middlewares/must-authenticated');
 module.exports = function(app) {
   
   // Only for registred users
-  app.all('/private',       mustAuthenticatedMw);
+  app.all('/private',        mustAuthenticatedMw);
   app.all('/private/*',      mustAuthenticatedMw);
 
 
   // Basic routes
-  app.get('/',               function(req, res) { res.render('public'); });
-  app.get('/private',        function(req, res) { res.render('private'); });
-  app.get('/fail',           function(req, res) { res.render('fail'); });
+  app.get('/',               controllers.render('public'));
+  app.get('/private',        controllers.render('private'));
+  app.get('/fail',           controllers.render('fail'));
 
 
   // Auth controllers
-  app.post('/login', controllers.users.login);
-  app.post('/register', controllers.users.register);
-  app.get('/logout', controllers.users.logout);
+  app.post('/login',         controllers.users.login);
+  app.post('/register',      controllers.users.register);
+  app.get('/logout',         controllers.users.logout);
 
 };
