@@ -17,15 +17,13 @@ var bootableEnv    = require('bootable-environment');
 var app = bootable(express());
 
 // Setup initializers
-app.phase(bootable.initializers('setup/initializers'));
+app.phase(bootable.initializers('setup/initializers/'));
 
 // Setup environments
-app.phase(bootableEnv('setup/environments', app));
+app.phase(bootableEnv('setup/environments/', app));
 
 // Setup routes
-app.phase(function(){
-  require('./routes')(app);
-});
+app.phase(bootable.routes('routes/', app));
 
 // Boot app
 app.boot(function(err) {
