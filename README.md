@@ -6,6 +6,5 @@
 4. ...
 5. Profit
 
-
 [http://habrahabr.ru/post/201206/](http://habrahabr.ru/post/201206/)
 
