@@ -7,8 +7,3 @@
 5. Profit
 
 [http://habrahabr.ru/post/201206/](http://habrahabr.ru/post/201206/)
-
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/shuvalov-anton/passport-auth-example/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
