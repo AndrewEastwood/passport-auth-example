@@ -29,8 +29,7 @@ module.exports = function(done) {
   mongoose.connection.on('error', function(err) {
     log.error('Could not connect to mongo server!');
     log.error(err.message);
-    done();
-    return err;
+    return done(err);
   });
 
   try {
@@ -39,6 +38,7 @@ module.exports = function(done) {
     log.info('Started connection on ' + (config.get('mongoose:db')).cyan + ', waiting for it to open...'.grey);
   } catch (err) {
     log.error(('Setting up failed to connect to ' + config.get('mongoose:db')).red, err.message);
+    done(err);
   }
 
 };
