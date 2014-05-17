@@ -34,7 +34,6 @@ module.exports = function(done) {
 
   try {
     mongoose.connect(config.get('mongoose:db'));
-    mongoose.connection;
     log.info('Started connection on ' + (config.get('mongoose:db')).cyan + ', waiting for it to open...'.grey);
   } catch (err) {
     log.error(('Setting up failed to connect to ' + config.get('mongoose:db')).red, err.message);
