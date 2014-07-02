@@ -16,6 +16,7 @@
     "winston": "~0.7.2",
     "require-tree": "~0.3.2",
     "winston-wrapper": "~1.0.0",
-    "bootable-environment": "~0.1.0"
+    "bootable-environment": "~0.1.0",
+    "colors": "*"
   }
 }
