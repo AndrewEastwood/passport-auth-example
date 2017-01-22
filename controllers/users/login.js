@@ -1,33 +1,26 @@
-'use strict';
+(function () {
+  'use strict';
 
-/**
- * Module dependencies.
- */
-var log            = require('winston-wrapper')(module);
-var config         = require('nconf');
+  /**
+   * Module dependencies.
+   */
+  var log4js         = require('log4js');
+  var log            = log4js.getLogger('controller/users/login.js');
+  var config         = require('nconf');
+  var passport       = require('passport');
 
-var passport       = require('passport');
-
-// End of dependencies.
+  // End of dependencies.
 
 
-module.exports = function(req, res, next) {
+  module.exports = function(req, res, next) {
 
-  log.info('someone trying to login');
+    log.info('someone trying to login');
 
-  passport.authenticate('local',
-    function(err, user, info) {
-      log.info('user:', user);
-      return err 
-        ? next(err)
-        : user
-          ? req.logIn(user, function(err) {
-              return err
-                ? next(err)
-                : res.redirect('/private');
-            })
-          : res.redirect('/fail');
-    }
-  )(req, res, next);
+    passport.authenticate('local', {
+      successRedirect: '/private',
+      failureRedirect: '/'
+    })(req, res, next);
 
-};
+  };
+
+})();

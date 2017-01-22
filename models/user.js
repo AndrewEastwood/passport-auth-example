@@ -1,25 +1,28 @@
-'use strict';
+(function () {
+  'use strict';
 
-/**
- * Module dependencies.
- */
-var log            = require('winston-wrapper')(module);
-var mongoose       = require('mongoose');
-
-// End of dependencies.
+  var log4js = require('log4js');
+  var log = log4js.getLogger();
+  var mongoose = require('mongoose');
 
 
-var UserSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    unique: true,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  books: []
-});
+  // TODO: need a more safety
 
-mongoose.model('user', UserSchema);
+  /**
+   * @class UserSchema
+   */
+  var UserSchema = new mongoose.Schema({
+    username: {
+      type: String,
+      unique: true,
+      required: true
+    },
+    password: {
+      type: String,
+      required: true
+    },
+  });
+
+  mongoose.model('user', UserSchema);
+
+})();

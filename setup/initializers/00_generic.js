@@ -9,19 +9,23 @@
 // previous one has completed before the next one executes.
 
 
-'use strict';
+(function () {
+  'use strict';
 
-/**
- * Module dependencies.
- */
-var config    = require('nconf');
-var log       = require('winston-wrapper')(module);
-var pwd       = process.env.PWD;
+  /**
+   * Module dependencies.
+   */
+  var config = require('nconf');
+  var log4js = require('log4js');
+  var log = log4js.getLogger('00_generic.js');
+  var pwd = process.env.PWD;
 
 // end of dependencies.
 
 
-module.exports = function() {
-  // Setup nconf
-  config.file({'file': pwd+'/config.json'});
-};
+  module.exports = function() {
+    // Setup nconf
+    config.file({'file': pwd+'/config.json'});
+  };
+
+})();
