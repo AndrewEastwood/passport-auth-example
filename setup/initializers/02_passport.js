@@ -9,50 +9,54 @@
 // previous one has completed before the next one executes.
 
 
-'use strict';
+(function () {
+  'use strict';
 
-/**
- * Module dependencies.
- */
-var log            = require('winston-wrapper')(module);
-var config         = require('nconf');
+  /**
+   * Module dependencies.
+   */
+  var log4js         = require('log4js');
+  var log            = log4js.getLogger('02_passport.js');
+  var config         = require('nconf');
 
-var passport       = require('passport');
-var LocalStrategy  = require('passport-local').Strategy;
-var mongoose       = require('mongoose');
-var User           = mongoose.model('user');
+  var passport       = require('passport');
+  var LocalStrategy  = require('passport-local').Strategy;
+  var mongoose       = require('mongoose');
+  var User           = mongoose.model('user');
 
-// end of dependencies.
+  // end of dependencies.
 
-// TODO: добавить done()?
-module.exports = function() {
-  passport.use(new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password'
-  }, function(username, password,done){
-    User.findOne({ username : username},function(err,user){
-      return err 
-        ? done(err)
-        : user
+  // TODO: add done()?
+  module.exports = function() {
+    passport.use(new LocalStrategy({
+      usernameField: 'email',
+      passwordField: 'password'
+    }, function(username, password,done){
+      User.findOne({ username : username},function(err,user){
+        return err
+          ? done(err)
+          : user
           ? password === user.password
-            ? done(null, user)
-            : done(null, false, { message: 'Incorrect password.' })
+          ? done(null, user)
+          : done(null, false, { message: 'Incorrect password.' })
           : done(null, false, { message: 'Incorrect username.' });
+      });
+    }));
+
+
+    passport.serializeUser(function(user, done) {
+      done(null, user.id);
     });
-  }));
 
 
-  passport.serializeUser(function(user, done) {
-    done(null, user.id);
-  });
-
-
-  passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err,user){
-      err 
-        ? done(err)
-        : done(null,user);
+    passport.deserializeUser(function(id, done) {
+      User.findById(id, function(err,user){
+        err
+          ? done(err)
+          : done(null,user);
+      });
     });
-  });
 
-};
+  };
+
+})();

@@ -1,19 +1,23 @@
-'use strict';
+(function () {
+  'use strict';
 
-/**
- * Module dependencies.
- */
-var log            = require('winston-wrapper')(module);
-var config         = require('nconf');
+  /**
+   * Module dependencies.
+   */
+  var log4js = require('log4js');
+  var log = log4js.getLogger('controller/render.js');
+  var config         = require('nconf');
 
-// End of dependencies.
+  // End of dependencies.
 
 
-/**
- * Обертка над res.render().
- */
-module.exports = function(template, variables) {
-  return function (req, res) {
-    res.render(template, variables);
+  /**
+   * Wrapper over res.render().
+   */
+  module.exports = function(template, variables) {
+    return function (req, res) {
+      res.render(template, variables);
+    };
   };
-};
+
+})();

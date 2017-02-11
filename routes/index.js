@@ -1,34 +1,38 @@
-'use strict';
+(function () {
+  'use strict';
 
-/**
- * Module dependencies.
- */
-var log                      = require('winston-wrapper')(module);
-var config                   = require('nconf');
+  /**
+   * Module dependencies.
+   */
+  var log4js = require('log4js');
+  var log = log4js.getLogger('routes/index.js');
+  var config = require('nconf');
 
-var requireTree              = require('require-tree');
-var controllers              = requireTree('../controllers');
-var mustAuthenticatedMw      = require('../middlewares/must-authenticated');  
+  var requireTree              = require('require-tree');
+  var controllers              = requireTree('../controllers');
+  var mustAuthenticatedMw      = require('../middlewares/must-authenticated');
 
-// End of dependencies.
-
-
-module.exports = function() {
-  
-  // Only for registred users
-  this.all('/private',       mustAuthenticatedMw);
-  this.all('/private/*',     mustAuthenticatedMw);
+  // End of dependencies.
 
 
-  // Basic routes
-  this.get('/',              controllers.render('public'));
-  this.get('/private',       controllers.render('private'));
-  this.get('/fail',          controllers.render('fail'));
+  module.exports = function() {
+
+    // Only for registred users
+    this.all('/private',       mustAuthenticatedMw);
+    this.all('/private/*',     mustAuthenticatedMw);
 
 
-  // Auth controllers
-  this.post('/login',        controllers.users.login);
-  this.post('/register',     controllers.users.register);
-  this.get('/logout',        controllers.users.logout);
+    // Basic routes
+    this.get('/',              controllers.render('public'));
+    this.get('/private',       controllers.render('private'));
+    this.get('/fail',          controllers.render('fail'));
 
-};
+
+    // Auth controllers
+    this.post('/login',        controllers.users.login);
+    this.post('/register',     controllers.users.register);
+    this.get('/logout',        controllers.users.logout);
+
+  };
+
+})();

@@ -1,34 +1,32 @@
-'use strict';
+(function () {
+  'use strict';
 
-/**
- * Module dependencies.
- */
+  var express = require('express');
 
-var log            = require('winston-wrapper')(module);
-var config         = require('nconf');
+  var bootable = require('bootable');
+  var bootableEnv = require('bootable-environment');
 
-var express        = require('express');
-var bootable       = require('bootable');
-var bootableEnv    = require('bootable-environment');
+  var log4js = require('log4js');
+  var log = log4js.getLogger('app.js');
+  var config = require('nconf');
 
-// End of dependencies.
+  var app = bootable(express());
 
+  // Setup initializers
+  app.phase(bootable.initializers('setup/initializers/'));
 
-var app = bootable(express());
+  // Setup environments
+  app.phase(bootableEnv('setup/environments/', app));
 
-// Setup initializers
-app.phase(bootable.initializers('setup/initializers/'));
+  // Setup routes
+  app.phase(bootable.routes('routes/', app));
 
-// Setup environments
-app.phase(bootableEnv('setup/environments/', app));
-
-// Setup routes
-app.phase(bootable.routes('routes/', app));
-
-// Boot app
-app.boot(function(err) {
-  if (err) { throw err; }
-  app.listen(config.get('express:port'), function() {
-    log.info('Express listen port', config.get('express:port'));
+  // Boot app
+  app.boot(function(err) {
+    if (err) { throw err; }
+    app.listen(config.get('express:port'), function() {
+      log.info('Express listen port', config.get('express:port'));
+    });
   });
-});
+
+})();
