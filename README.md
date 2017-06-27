@@ -1,3 +1,6 @@
+N.B.: За репозиторием не слежу, pull-request'ы принимаю не глядя.
+
+
 ## How to
 
 1. Launch `mongod`
